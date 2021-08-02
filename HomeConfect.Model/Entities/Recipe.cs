@@ -1,4 +1,4 @@
-﻿using Abstractions;
+﻿using Abstractions.Domain;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
