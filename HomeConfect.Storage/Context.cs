@@ -13,7 +13,7 @@ namespace HomeConfect.Storage
 
         public Context(DbContextOptions<Context> options) : base(options)
         {
-            Database.EnsureDeleted();
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
     }

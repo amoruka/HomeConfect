@@ -1,4 +1,4 @@
-﻿namespace Abstractions
+﻿namespace Abstractions.Domain
 {
     public interface IEntity
     {
