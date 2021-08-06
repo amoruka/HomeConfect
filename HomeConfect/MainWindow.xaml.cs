@@ -1,4 +1,7 @@
-﻿using HomeConfect.Storage;
+﻿using HomeConfect.Domain.Criterion;
+using HomeConfect.Storage;
+using HomeConfect.Storage.Queries;
+using HomeConfect.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +31,18 @@ namespace HomeConfect
             InitializeComponent();
 
             dataContext = context;
+
+            // TODO ?
+            DataContext = new MainViewModel
+            {
+                RecipeBookVM = new RecipeBookViewModel
+                {
+                    CurrentView = new RecipeTilesFeedViewModel
+                    {
+                        RecipeTiles = new GetAllRecipesQuery(context).Ask(new GetAllRecipes()).Select(x => new RecipeTileViewModel(x)).ToList()
+                    }
+                }
+            };
         }
     }
 }

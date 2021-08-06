@@ -4,9 +4,58 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeConfect"
+        xmlns:viewmodel="clr-namespace:HomeConfect.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="550" Width="1060"
+        WindowStyle="None"
+        ResizeMode="CanResize"
+        Background="Transparent"
+        AllowsTransparency="True">
+    <Window.DataContext>
+        <viewmodel:MainViewModel/>
+    </Window.DataContext>
 
-    </Grid>
+    <Border Background="#78909c" CornerRadius="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="HomeConfect"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="24"
+                       Foreground="#FFFFFF"
+                       />
+
+            <StackPanel Grid.Row="1">
+                <RadioButton Content="Рецепты"
+                             Height="50"
+                             FontSize="18"
+                             Style="{StaticResource MenuButtonStyle}"
+                             IsChecked="True"
+                             Command="{Binding RecipeBookCommand}"/>
+
+                <RadioButton Content="Календарь"
+                             Height="50"
+                             FontSize="18"
+                             Style="{StaticResource MenuButtonStyle}"
+                             Command="{Binding CalendarCommand}"/>
+
+                <RadioButton Content="Список покупок"
+                             Height="50"
+                             FontSize="18"
+                             Style="{StaticResource MenuButtonStyle}"/>
+            </StackPanel>
+
+            <ContentControl Grid.Row="1" Grid.Column="1" 
+                                Content="{Binding CurrentView}"/>
+        </Grid>
+    </Border>
 </Window>

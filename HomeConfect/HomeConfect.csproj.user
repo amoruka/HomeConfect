@@ -7,7 +7,45 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\CalendarView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Controls\CommandBar.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\RecipeBookView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\RecipeEditView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\RecipeTilesFeedView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Theme\MenuButtonTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Theme\TextBoxTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\CalendarView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Controls\CommandBar.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\RecipeBookView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\RecipeEditView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\RecipeTilesFeedView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
