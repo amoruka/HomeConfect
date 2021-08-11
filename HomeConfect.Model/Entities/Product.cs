@@ -1,7 +1,7 @@
 ﻿using Abstractions.Domain;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HomeConfect.Domain
+namespace HomeConfect.Domain.Entities
 {
     [Table(nameof(Product))]
     public class Product : IEntity

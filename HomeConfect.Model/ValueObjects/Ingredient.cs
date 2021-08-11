@@ -1,4 +1,5 @@
 ﻿using Abstractions.Domain;
+using HomeConfect.Domain.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HomeConfect.Domain

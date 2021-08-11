@@ -1,4 +1,4 @@
-﻿using HomeConfect.Domain;
+﻿using HomeConfect.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace HomeConfect.Storage

@@ -1,7 +1,7 @@
 ﻿using Abstractions.Queries;
 
-using HomeConfect.Domain;
 using HomeConfect.Domain.Criterion;
+using HomeConfect.Domain.Entities;
 
 using System.Collections.Generic;
 using System.Linq;

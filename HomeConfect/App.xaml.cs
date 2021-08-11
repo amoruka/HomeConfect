@@ -1,4 +1,7 @@
-﻿using HomeConfect.Storage;
+﻿using Abstractions.Commands;
+using HomeConfect.Domain.Services.Recipes;
+using HomeConfect.Storage;
+using HomeConfect.Storage.Commands;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,6 +41,11 @@ namespace HomeConfect
         {
             // ...
             services.AddDbContext<Context>(options => options.UseSqlite(Configuration.GetConnectionString("HomeConfect")));
+
+            services.AddSingleton<ICommandFactory, CommandFactory>();
+            services.AddScoped<ICommandBuilder, DefaultCommandBuilder>();
+
+            services.AddScoped<IRecipeService, RecipeService>();
 
             services.AddTransient(typeof(MainWindow));
         }
