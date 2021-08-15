@@ -3,22 +3,56 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:HomeConfect"
         xmlns:viewmodel="clr-namespace:HomeConfect.ViewModels"
+        xmlns:uc="clr-namespace:HomeConfect.Views.Controls"
         mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}"
         Title="MainWindow" Height="550" Width="1060"
         WindowStyle="None"
         ResizeMode="CanResize"
-        Background="Transparent"
         AllowsTransparency="True">
     <Window.DataContext>
         <viewmodel:MainViewModel/>
     </Window.DataContext>
 
-    <Border Background="#78909c" CornerRadius="20">
+    <Window.Resources>
+        <!--// Tooltip Style Template //-->
+
+        <Style TargetType="ToolTip" x:Key="tt_style">
+
+            <Setter Property="Placement" Value="Right"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Margin" Value="20,0,0,0"/>
+            <Setter Property="Background" Value="#4A5668"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="PlacementRectangle" Value="60,0,0,0"/>
+            <Setter Property="HorizontalOffset" Value="15"/>
+            <Setter Property="VerticalOffset" Value="6"/>
+            <Setter Property="HasDropShadow" Value="True"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
+        </Style>
+
+        <Style TargetType="ListViewItem" x:Key="navListItem">
+            <Setter Property="Height" Value="50" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Margin" Value="0,0,0,15" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+    </Window.Resources>
+
+    <Border CornerRadius="20">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
@@ -27,32 +61,278 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="HomeConfect"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       FontSize="24"
-                       Foreground="#FFFFFF"
-                       />
+            <Grid Grid.RowSpan="2" 
+                  x:Name="navPanel"
+                  HorizontalAlignment="Left"
+                  Width="50">
+                <StackPanel x:Name="stPanel">
+                    <Grid Height="90">
+                        <TextBlock  Grid.Row="1"
+                                    Grid.Column="0"
+                                    Margin="50,-20,0,0"
+                                    Text="HomeConfect"
+                                    FontSize="22"
+                                    Background="Transparent"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center">
+                            
+                            <!--// Shadow Effect //-->
 
-            <StackPanel Grid.Row="1">
-                <RadioButton Content="Рецепты"
-                             Height="50"
-                             FontSize="18"
-                             Style="{StaticResource MenuButtonStyle}"
-                             IsChecked="True"
-                             Command="{Binding RecipeBookCommand}"/>
+                            <TextBlock.Effect>
 
-                <RadioButton Content="Календарь"
-                             Height="50"
-                             FontSize="18"
-                             Style="{StaticResource MenuButtonStyle}"
-                             Command="{Binding CalendarCommand}"/>
+                                <DropShadowEffect  BlurRadius="10"
+                                                   ShadowDepth="1"
+                                                   Direction="-90"
+                                                   Color="White"/>
 
-                <RadioButton Content="Список покупок"
-                             Height="50"
-                             FontSize="18"
-                             Style="{StaticResource MenuButtonStyle}"/>
-            </StackPanel>
+                            </TextBlock.Effect>
+
+                        </TextBlock>
+
+                        <!--// Toggle Button //-->
+
+                        <ToggleButton x:Name="Tg_Btn"
+                                      Grid.Column="0"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Left"
+                                      Margin="10,-20,0,0"
+                                      Height="30"
+                                      Width="30"
+                                      BorderThickness="0"
+                                      Style="{DynamicResource MaterialDesignHamburgerToggleButton}"
+                                      Unchecked="Tg_Btn_Unchecked" Checked="Tg_Btn_Checked">
+
+                            <!--// Toggle Button - Checked, Unchecked events //-->
+
+                            <ToggleButton.Triggers>
+
+                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+
+                                    <BeginStoryboard>
+
+                                        <Storyboard x:Name="HideStackPanel">
+
+                                            <DoubleAnimation    
+                                                
+                                                Storyboard.TargetName="navPanel"
+                                                Storyboard.TargetProperty="Width"
+                                                BeginTime="0:0:0"
+                                                From="200" To="50"
+                                                Duration="0:0:0.2">
+
+                                            </DoubleAnimation>
+
+                                        </Storyboard>
+
+                                    </BeginStoryboard>
+
+                                </EventTrigger>
+
+                                <EventTrigger RoutedEvent="ToggleButton.Checked">
+
+                                    <BeginStoryboard>
+
+                                        <Storyboard x:Name="ShowStackPanel">
+
+                                            <DoubleAnimation
+                                                
+                                                Storyboard.TargetName="navPanel"
+                                                Storyboard.TargetProperty="Width"
+                                                BeginTime="0:0:0"
+                                                From="50" To="200"
+                                                Duration="0:0:0.3">
+
+                                            </DoubleAnimation>
+
+                                        </Storyboard>
+
+                                    </BeginStoryboard>
+
+                                </EventTrigger>
+
+                            </ToggleButton.Triggers>
+
+
+                        </ToggleButton>
+                    </Grid>
+
+                    <ListView  x:Name="LV"
+                               Background="Transparent"
+                               BorderBrush="Transparent"
+                               Margin="10,0,0,0"
+                               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                        <!--// RecipeBook //-->
+
+                        <ListViewItem MouseEnter="ListViewItem_MouseEnter"
+                                      Style="{StaticResource navListItem}"
+                                      >
+
+                            <uc:MenuButton Text="Рецепты" 
+                                           Icon="SilverwareVariant"
+                                           IsChecked="True"
+                                           Command="{Binding RecipeBookCommand}"/>
+
+                            <!--// Tooltip //-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="ttRecipeBook"
+                                         Content="Рецепты"
+                                         Style="{StaticResource tt_style}"/>
+
+                            </ListViewItem.ToolTip>
+
+                        </ListViewItem>
+
+                        <!--// Calendar //-->
+
+                        <ListViewItem MouseEnter="ListViewItem_MouseEnter"
+                                      Style="{StaticResource navListItem}"
+                                      >
+
+                            <uc:MenuButton Text="Календарь" 
+                                           Icon="CalendarCheck"
+                                           Command="{Binding CalendarCommand}"/>
+
+                            <!--// Tooltip //-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="ttCalendar"
+                                         Content="Календарь"
+                                         Style="{StaticResource tt_style}"/>
+
+                            </ListViewItem.ToolTip>
+
+                        </ListViewItem>
+
+                        <!--// ShopingList //-->
+
+                        <ListViewItem MouseEnter="ListViewItem_MouseEnter"
+                                      Style="{StaticResource navListItem}"
+                                      >
+
+                            <uc:MenuButton Text="Список покупок" 
+                                           Icon="ViewList"
+                                           />
+
+
+                            <!--// Tooltip //-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="ttShopingList"
+                                         Content="Список покупок"
+                                         Style="{StaticResource tt_style}"/>
+
+                            </ListViewItem.ToolTip>
+
+                        </ListViewItem>
+
+                        <!--// Settings //-->
+
+                        <ListViewItem MouseEnter="ListViewItem_MouseEnter"
+                                      Style="{StaticResource navListItem}">
+
+                            <uc:MenuButton Text="Настройки" 
+                                           Icon="CogBox"
+                                           />
+
+                            <!--// Tooltip //-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="ttSettings"
+                                         Content="Настройки"
+                                         Style="{StaticResource tt_style}"/>
+
+                            </ListViewItem.ToolTip>
+
+                        </ListViewItem>
+
+                        <!--// Sign Out //-->
+
+                        <ListViewItem MouseEnter="ListViewItem_MouseEnter"
+                                      Style="{StaticResource navListItem}">
+
+                            <uc:MenuButton Text="Выйти" 
+                                           Icon="Power"
+                                           />
+
+                            <!--// Tooltip //-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="ttSignout"
+                                         Content="Закрыть приложение"
+                                         Style="{StaticResource tt_style}"/>
+
+                            </ListViewItem.ToolTip>
+
+                        </ListViewItem>
+
+                        <!--// Listview items style template //-->
+
+                        <ListView.ItemContainerStyle>
+
+                            <Style TargetType="ListViewItem">
+
+                                <Setter Property="Template">
+
+                                    <Setter.Value>
+
+                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+
+                                            <Border x:Name="Bd"
+                                                    Height="50"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    Background="{TemplateBinding Background}"
+                                                    Padding="{TemplateBinding Padding}"
+                                                    SnapsToDevicePixels="True">
+
+                                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                                            </Border>
+
+                                            <ControlTemplate.Triggers>
+
+                                                <MultiTrigger>
+
+                                                    <MultiTrigger.Conditions>
+
+                                                        <Condition Property="IsMouseOver" Value="True"/>
+
+                                                    </MultiTrigger.Conditions>
+
+                                                    <Setter Property="Background"
+                                                            TargetName="Bd"
+                                                            Value="#404D5B"/>
+
+                                                    <Setter Property="BorderBrush"
+                                                            TargetName="Bd"
+                                                            Value="#404D5B"/>
+
+                                                </MultiTrigger>
+
+                                            </ControlTemplate.Triggers>
+
+                                        </ControlTemplate>
+
+                                    </Setter.Value>
+
+                                </Setter>
+
+                            </Style>
+
+                        </ListView.ItemContainerStyle>
+
+                    </ListView>
+                </StackPanel>
+            </Grid>
 
             <ContentControl Grid.Row="1" Grid.Column="1" 
                                 Content="{Binding CurrentView}"/>
