@@ -1,10 +1,16 @@
 ﻿using Abstractions.Commands;
+using Abstractions.Queries;
+
+using HomeConfect.Domain.Services.Products;
 using HomeConfect.Domain.Services.Recipes;
 using HomeConfect.Storage;
 using HomeConfect.Storage.Commands;
+using HomeConfect.Storage.Queries;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 using System;
 using System.IO;
 using System.Windows;
@@ -45,7 +51,13 @@ namespace HomeConfect
             services.AddSingleton<ICommandFactory, CommandFactory>();
             services.AddScoped<ICommandBuilder, DefaultCommandBuilder>();
 
+            services.AddSingleton<IQueryFactory, QueryFactory>();
+            services.AddScoped(typeof(IQueryFor<>), typeof(DefaultQueryFor<>));
+            services.AddScoped<IQueryBuilder, DefaultQueryBuilder>();
+
+            // Domain services
             services.AddScoped<IRecipeService, RecipeService>();
+            services.AddScoped<IProductService, ProductService>();
 
             services.AddTransient(typeof(MainWindow));
         }

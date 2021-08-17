@@ -15,7 +15,7 @@ namespace HomeConfect.Storage.Commands
 
         public CommandFactory(IServiceProvider provider)
         {
-            serviceProvider = provider;
+            serviceProvider = provider ?? throw new ArgumentNullException(nameof(provider));
 
             LoadCommands();
         }
@@ -25,6 +25,11 @@ namespace HomeConfect.Storage.Commands
             var incomingContext = typeof(TCommandContext);
 
             var type = Commands[incomingContext];
+
+            if (type is null)
+            {
+                throw new Exception($"Command with context {nameof(incomingContext)} not found");
+            }
 
             // Service locator?
             return Activator.CreateInstance(type, serviceProvider.GetService(typeof(Context))) as ICommand<TCommandContext>;
