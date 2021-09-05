@@ -1,11 +1,10 @@
 ﻿using Abstractions.Commands;
 
 using HomeConfect.Domain.CommandContext;
-using HomeConfect.Storage.Queries;
 
 namespace HomeConfect.Storage.Commands
 {
-    public class AddProductCommand : AbstractQuery, ICommand<AddProductContext>
+    public class AddProductCommand : AbstractRepository, ICommand<AddProductContext>
     {
         public AddProductCommand(Context context) : base(context) { }
 

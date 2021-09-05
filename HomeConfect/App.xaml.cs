@@ -3,6 +3,7 @@ using Abstractions.Queries;
 
 using HomeConfect.Domain.Services.Products;
 using HomeConfect.Domain.Services.Recipes;
+using HomeConfect.Domain.Services.Scales;
 using HomeConfect.Storage;
 using HomeConfect.Storage.Commands;
 using HomeConfect.Storage.Queries;
@@ -58,6 +59,7 @@ namespace HomeConfect
             // Domain services
             services.AddScoped<IRecipeService, RecipeService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IScaleService, ScaleService>();
 
             services.AddTransient(typeof(MainWindow));
         }

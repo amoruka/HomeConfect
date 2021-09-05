@@ -8,8 +8,11 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="Teal" SecondaryColor="Lime" />
+                <materialDesign:CustomColorTheme BaseTheme="Light" PrimaryColor="#607D8B" SecondaryColor="#00BCD4" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary>
+                    <SolidColorBrush x:Key="SecondaryHueMidForegroundBrush" Color="#FFFFFF"/>
+                </ResourceDictionary>
                 
                 <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="Theme/TextBoxTheme.xaml" />
@@ -24,11 +27,23 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodel:RecipeEditViewModel}">
-                <view:RecipeEditView />
+                <view:RecipeEditView  />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodel:CalendarViewModel}">
                 <view:CalendarView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodel:SettingsViewModel}">
+                <view:SettingsView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodel:ProductListViewModel}">
+                <view:ProductListView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodel:ScaleListViewModel}">
+                <view:ScalesListView />
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

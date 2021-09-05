@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace HomeConfect.Storage.Queries
 {
-    public class GetAllRecipesQuery : AbstractQuery, IQuery<GetAllRecipes, List<Recipe>>
+    public class GetAllRecipesQuery : AbstractRepository, IQuery<GetAllRecipes, List<Recipe>>
     {
         public GetAllRecipesQuery(Context context) : base(context)
         { }

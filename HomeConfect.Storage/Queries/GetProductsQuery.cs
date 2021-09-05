@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace HomeConfect.Storage.Queries
 {
-    public class GetProductsQuery : AbstractQuery, IQuery<GetProductsCriterion, ObservableCollection<Product>>
+    public class GetProductsQuery : AbstractRepository, IQuery<GetProductsCriterion, ObservableCollection<Product>>
     {
         public GetProductsQuery(Context context) : base(context) { }
 
