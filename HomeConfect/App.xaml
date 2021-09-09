@@ -26,8 +26,8 @@
                 <view:RecipeTilesFeedView />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewmodel:RecipeEditViewModel}">
-                <view:RecipeEditView  />
+            <DataTemplate DataType="{x:Type viewmodel:RecipeAddViewModel}">
+                <view:RecipeAddView  />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodel:CalendarViewModel}">

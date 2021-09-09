@@ -10,7 +10,7 @@
             set
             {
                 currentView = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(CurrentView));
             }
         }
     }

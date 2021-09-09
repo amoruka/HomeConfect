@@ -8,8 +8,13 @@ namespace HomeConfect.Domain
     {
         public int Id { get; set; }
 
-        public int Number { get; set; }
+        public int Number { get; protected set; }
 
         public string Description { get; set; }
+
+        internal void SetNumber(int number)
+        {
+            Number = number;
+        }
     }
 }

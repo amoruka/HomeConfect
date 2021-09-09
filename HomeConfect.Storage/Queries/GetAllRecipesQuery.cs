@@ -3,19 +3,18 @@
 using HomeConfect.Domain.Criterion;
 using HomeConfect.Domain.Entities;
 
-using System.Collections.Generic;
-using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace HomeConfect.Storage.Queries
 {
-    public class GetAllRecipesQuery : AbstractRepository, IQuery<GetAllRecipes, List<Recipe>>
+    public class GetAllRecipesQuery : AbstractRepository, IQuery<GetAllRecipes, ObservableCollection<Recipe>>
     {
         public GetAllRecipesQuery(Context context) : base(context)
         { }
 
-        public List<Recipe> Ask(GetAllRecipes criterion)
+        public ObservableCollection<Recipe> Ask(GetAllRecipes criterion)
         {
-            return Context.Recipes.ToList();
+            return new ObservableCollection<Recipe>(Context.Recipes);
         }
     }
 }

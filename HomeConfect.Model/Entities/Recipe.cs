@@ -1,5 +1,6 @@
 ﻿using Abstractions.Domain;
-using System.Collections.Generic;
+
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HomeConfect.Domain.Entities
@@ -20,8 +21,28 @@ namespace HomeConfect.Domain.Entities
 
         public string Source { get; set; }
 
-        public List<Ingredient> Ingredients { get; set; }
+        public ObservableCollection<Ingredient> Ingredients { get; set; }
 
-        public List<RecipeStep> Steps { get; set; }
+        public ObservableCollection<RecipeStep> Steps { get; }
+
+        public Recipe()
+        {
+            Steps = new ObservableCollection<RecipeStep>();
+            Ingredients = new ObservableCollection<Ingredient>();
+        }
+
+        public void AddIngredient(Ingredient ingredient)
+        {
+            ingredient.Recipe = this;
+
+            Ingredients.Add(ingredient);
+        }
+
+        public void AddRecipeStep(RecipeStep newStep)
+        {
+            newStep.SetNumber(Steps.Count + 1);
+
+            Steps.Add(newStep);
+        }
     }
 }

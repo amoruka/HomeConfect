@@ -10,6 +10,7 @@ namespace HomeConfect.ViewModels
     public class ScaleListViewModel : ObservableObject
     {
         private readonly IScaleService scaleService;
+
         public ObservableCollection<Scale> Scales { get; set; }
 
         private Scale CurrentScale { get; set; }
